@@ -87,19 +87,19 @@
 			// create a list of <li> items 
 			var lll = [];
 			for (var t = 0; t < S.click_count; t++) {
-				ss.add(lll, React.DOM.li(null, [ss.formatString('item {0} with name {1} clicked {2} times', t, P.name, S.click_count)]));
+				ss.add(lll, React.DOM.li(null, ss.formatString('item {0} with name {1} clicked {2} times', t, P.name, S.click_count)));
 			}
 			// and wrap them in a <div> and <ul> 
 			var $t1 = {};
 			$t1.style = ss.mkdict(['font-size', '1em']);
-			return React.DOM.div($t1, [React.DOM.ul({}, [lll, React.DOM.li(ReactJs.PropsExtensions.onClick({}, ss.mkdel(this, this.handleClick)), ['click here']), React.DOM.li({}, ['this is a fixed item']), React.DOM.li({}, [hello()])])]);
+			return React.DOM.div($t1, React.DOM.ul(null, lll, React.DOM.li(ReactJs.PropsExtensions.onClick({}, ss.mkdel(this, this.handleClick)), 'click here'), React.DOM.li(null, 'this is a fixed item'), React.DOM.li(null, hello())));
 		}
 	}, ReactJs.ReactComponent);
 	ss.initClass($ButtonCounter$ButtonProp, $asm, {});
 	ss.initClass($ButtonCounter$ButtonState, $asm, {});
 	ss.initClass($Hello, $asm, {
 		render: function() {
-			return React.DOM.div(null, ["this is an item made from a component named 'hello'"]);
+			return React.DOM.div(null, "this is an item made from a component named 'hello'");
 		}
 	}, ReactJs.ReactComponent);
 	ss.initClass($JasmineTests, $asm, {

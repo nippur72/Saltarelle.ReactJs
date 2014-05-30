@@ -24,7 +24,7 @@ public class TestDemo
       // static constructor, e.g.:
       // var but = React.createClass<ButtonCounter>();
       // React.renderComponent(but.New(new {name="Someone"}), reactview);       
-   } 
+   }    
 }
 
 

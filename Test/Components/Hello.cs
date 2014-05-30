@@ -15,7 +15,7 @@ public class Hello : ReactComponent
 {
    public object render()
    {
-      return div(null,"this is an item made from a component named 'hello'");
+      return div("this is an item made from a component named 'hello'");
    }
 }  
    

@@ -75,16 +75,16 @@ public class ButtonCounter : ReactComponent
       List<ReactComponent> lll = new List<ReactComponent>();
       for(int t=0;t<S.click_count;t++) lll.Add
       ( 
-         li(null, string.Format("item {0} with name {1} clicked {2} times",t,P.name,S.click_count) )
+         li(string.Format("item {0} with name {1} clicked {2} times",t,P.name,S.click_count) )
       );         
 
       // and wrap them in a <div> and <ul> 
       return div(new Props{ style = new JsDictionary("font-size", "1em") }, 
-               ul(Prop,     
+               ul(     
                   lll, 
                   li(Prop.onClick(handleClick), "click here"),
-                  li(Prop, "this is a fixed item"),
-                  li(Prop, hello.New())              
+                  li("this is a fixed item"),
+                  li(hello.New())              
                )
             );                          
    }
