@@ -4,11 +4,11 @@
 	global.ReactJs = global.ReactJs || {};
 	ss.initAssembly($asm, 'saltarelle-react');
 	////////////////////////////////////////////////////////////////////////////////
-	// ReactJs.IReactComponent
-	var $ReactJs_IReactComponent = function() {
+	// ReactJs.IReactElement
+	var $ReactJs_IReactElement = function() {
 	};
-	$ReactJs_IReactComponent.__typeName = 'ReactJs.IReactComponent';
-	global.ReactJs.IReactComponent = $ReactJs_IReactComponent;
+	$ReactJs_IReactElement.__typeName = 'ReactJs.IReactElement';
+	global.ReactJs.IReactElement = $ReactJs_IReactElement;
 	////////////////////////////////////////////////////////////////////////////////
 	// ReactJs.ObjectExtensionMethods
 	var $ReactJs_ObjectExtensionMethods = function() {
@@ -167,23 +167,23 @@
 	};
 	global.ReactJs.PropsExtensions = $ReactJs_PropsExtensions;
 	////////////////////////////////////////////////////////////////////////////////
-	// ReactJs.ReactClass
-	var $ReactJs_ReactClass = function() {
-	};
-	$ReactJs_ReactClass.__typeName = 'ReactJs.ReactClass';
-	global.ReactJs.ReactClass = $ReactJs_ReactClass;
-	////////////////////////////////////////////////////////////////////////////////
 	// ReactJs.ReactComponent
 	var $ReactJs_ReactComponent = function() {
 	};
 	$ReactJs_ReactComponent.__typeName = 'ReactJs.ReactComponent';
 	global.ReactJs.ReactComponent = $ReactJs_ReactComponent;
 	////////////////////////////////////////////////////////////////////////////////
+	// ReactJs.ReactElement
+	var $ReactJs_ReactElement = function() {
+	};
+	$ReactJs_ReactElement.__typeName = 'ReactJs.ReactElement';
+	global.ReactJs.ReactElement = $ReactJs_ReactElement;
+	////////////////////////////////////////////////////////////////////////////////
 	// ReactJs.ReactHelper
 	var $ReactJs_ReactHelper = function() {
 	};
 	$ReactJs_ReactHelper.__typeName = 'ReactJs.ReactHelper';
-	$ReactJs_ReactHelper.CreateClass = function(T) {
+	$ReactJs_ReactHelper.CreateComponent = function(T) {
 		return function() {
 			var type = T;
 			var body = 'var $ob = {}; var $type=' + ss.getTypeFullName(type) + ';';
@@ -191,11 +191,12 @@
 			var getInitialState = 'getInitialState';
 			if (!ss.contains(methods, getInitialState)) {
 				// if user did not specify a getInitialState, provide an empty one
-				body += ss.formatString('$ob.{0}=(function() {{ $type.apply(this); return {{ }}; }});', getInitialState);
+				body += ss.formatString('$ob.{0}=(function() {{ /*$type.apply(this);*/ return {{ }}; }});', getInitialState);
 			}
 			else {
-				body += ss.formatString('$ob.{0}=(function() {{ $type.apply(this); return $type.prototype.{0}(); }});', getInitialState);
+				body += ss.formatString('$ob.{0}=(function() {{ /*$type.apply(this);*/ return $type.prototype.{0}(); }});', getInitialState);
 			}
+			// TODO .apply needed? 
 			ss.remove(methods, getInitialState);
 			for (var $t1 = 0; $t1 < methods.length; $t1++) {
 				var method = methods[$t1];
@@ -206,7 +207,10 @@
 			// TODO field and properties
 			var F = new Function('', body);
 			var defob = F.call(null);
-			return React.createClass(defob);
+			var component = React.createClass(defob);
+			// writes in _factory
+			type._factory = component;
+			return component;
 		};
 	};
 	global.ReactJs.ReactHelper = $ReactJs_ReactHelper;
@@ -222,7 +226,7 @@
 			while ($t1.moveNext()) {
 				var key = $t1.current();
 				if (key !== 'constructor') {
-					ss.add(result, key);
+					result.push(key);
 				}
 			}
 		}
@@ -232,12 +236,12 @@
 		return result;
 	};
 	global.ReactJs.TypeExtensionMethods = $ReactJs_TypeExtensionMethods;
-	ss.initInterface($ReactJs_IReactComponent, $asm, { getInitialState: null, getDefaultProps: null, render: null, componentWillMount: null, componentDidMount: null, componentWillReceiveProps: null, shouldComponentUpdate: null, componentWillUpdate: null, componentDidUpdate: null, componentWillUnmount: null });
+	ss.initInterface($ReactJs_IReactElement, $asm, { getInitialState: null, getDefaultProps: null, render: null, componentWillMount: null, componentDidMount: null, componentWillReceiveProps: null, shouldComponentUpdate: null, componentWillUpdate: null, componentDidUpdate: null, componentWillUnmount: null });
 	ss.initClass($ReactJs_ObjectExtensionMethods, $asm, {});
 	ss.initClass($ReactJs_Props, $asm, {});
 	ss.initClass($ReactJs_PropsExtensions, $asm, {});
-	ss.initClass($ReactJs_ReactClass, $asm, {});
 	ss.initClass($ReactJs_ReactComponent, $asm, {});
+	ss.initClass($ReactJs_ReactElement, $asm, {});
 	ss.initClass($ReactJs_ReactHelper, $asm, {});
 	ss.initClass($ReactJs_TypeExtensionMethods, $asm, {});
 })();

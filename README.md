@@ -1,6 +1,6 @@
 # Saltarelle.ReactJs
 
-Saltarelle.ReactJs is [ReactJs](http://facebook.github.io/react/) import library 
+Saltarelle.ReactJs is a [ReactJs](http://facebook.github.io/react/) import library 
 for the C#-to-Javascript compiler [Saltarelle](http://www.saltarelle-compiler.com).
 
 # Installation
@@ -16,5 +16,4 @@ On the website project:
 On the client C# project:
 
 - add a reference to `React.dll` from this repo
-
 

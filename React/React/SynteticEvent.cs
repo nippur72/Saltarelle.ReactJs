@@ -43,6 +43,8 @@ namespace ReactJs
       public int charCode;
       public String key;
       public int keyCode;
+      // TODO obBeforeInpput ??
+      // TODO ?function getModifierState(key)
       public String locale;
       public int location;
       public bool metaKey;

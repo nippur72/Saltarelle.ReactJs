@@ -5,18 +5,9 @@
 	////////////////////////////////////////////////////////////////////////////////
 	// ButtonCounter
 	var $ButtonCounter = function() {
-		ReactJs.ReactComponent.call(this);
+		ReactJs.ReactElement.call(this);
 	};
 	$ButtonCounter.__typeName = 'ButtonCounter';
-	$ButtonCounter.New = function(name) {
-		if (ss.isNullOrUndefined($ButtonCounter.$_factory)) {
-			$ButtonCounter.$_factory = ReactJs.ReactHelper.CreateClass($ButtonCounter).call(null);
-		}
-		var $t2 = $ButtonCounter.$_factory;
-		var $t1 = new $ButtonCounter$ButtonProp();
-		$t1.name = name;
-		return $t2($t1);
-	};
 	global.ButtonCounter = $ButtonCounter;
 	////////////////////////////////////////////////////////////////////////////////
 	// ButtonCounter.ButtonProp
@@ -36,7 +27,7 @@
 	////////////////////////////////////////////////////////////////////////////////
 	// Hello
 	var $Hello = function() {
-		ReactJs.ReactComponent.call(this);
+		ReactJs.ReactElement.call(this);
 	};
 	$Hello.__typeName = 'Hello';
 	global.Hello = $Hello;
@@ -53,15 +44,14 @@
 	};
 	$TestDemo.__typeName = 'TestDemo';
 	$TestDemo.Main = function() {
-		// looks for the element that will host the main react view
+		// register components within React      
+		//Hello._factory         =
+		ReactJs.ReactHelper.CreateComponent($Hello).call(null);
+		//ButtonCounter._factory =
+		ReactJs.ReactHelper.CreateComponent($ButtonCounter).call(null);
+		// render into main view      
 		var reactview = document.getElementById('reactview');
-		// render the component: here ButtonCounter is instantiated by a custom static 
-		// constructor named "New" and defined in the ButtonCounter class
-		React.renderComponent($ButtonCounter.New('Someone'), reactview);
-		// alternatively react components can be instantiated with the general 
-		// static constructor, e.g.:
-		// var but = React.createClass<ButtonCounter>();
-		// React.renderComponent(but.New(new {name="Someone"}), reactview);       
+		React.render(React.createElement($ButtonCounter._factory), reactview);
 	};
 	global.TestDemo = $TestDemo;
 	ss.initClass($ButtonCounter, $asm, {
@@ -83,29 +73,30 @@
 			// component from Hello.cs
 			// the 'hello' variable will hold the component factory function
 			// instances of the hello component needs to be created with 'hello.New()'
-			var hello = ReactJs.ReactHelper.CreateClass($Hello).call(null);
 			// create a list of <li> items 
 			var lll = [];
 			for (var t = 0; t < S.click_count; t++) {
-				ss.add(lll, React.DOM.li(null, ss.formatString('item {0} with name {1} clicked {2} times', t, P.name, S.click_count)));
+				lll.push(React.DOM.li(null, ss.formatString('item {0} with name {1} clicked {2} times', t, P.name, S.click_count)));
 			}
 			// and wrap them in a <div> and <ul> 
 			var $t1 = {};
 			$t1.style = ss.mkdict(['font-size', '1em']);
-			return React.DOM.div($t1, React.DOM.ul(null, lll, React.DOM.li(ReactJs.PropsExtensions.onClick({}, ss.mkdel(this, this.handleClick)), 'click here'), React.DOM.li(null, 'this is a fixed item'), React.DOM.li(null, hello())));
+			var $t3 = React.DOM.p(null, 'Featuring React v0.12.2');
+			var $t2 = {};
+			$t2.style = ss.mkdict(['font-size', '2em']);
+			return React.DOM.div($t1, $t3, React.DOM.ul(null, lll, React.DOM.li(ReactJs.PropsExtensions.onClick($t2, ss.mkdel(this, this.handleClick)), 'click here'), React.DOM.li(null, 'this is a fixed item'), React.DOM.li(null, React.createElement($Hello._factory))));
 		}
-	}, ReactJs.ReactComponent);
+	}, ReactJs.ReactElement);
 	ss.initClass($ButtonCounter$ButtonProp, $asm, {});
 	ss.initClass($ButtonCounter$ButtonState, $asm, {});
 	ss.initClass($Hello, $asm, {
 		render: function() {
 			return React.DOM.div(null, "this is an item made from a component named 'hello'");
 		}
-	}, ReactJs.ReactComponent);
+	}, ReactJs.ReactElement);
 	ss.initClass($JasmineTests, $asm, {
 		SpecRunner: function() {
 		}
 	}, Object);
 	ss.initClass($TestDemo, $asm, {});
-	$ButtonCounter.$_factory = null;
 })();

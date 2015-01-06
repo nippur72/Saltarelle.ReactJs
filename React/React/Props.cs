@@ -14,6 +14,7 @@ namespace ReactJs
       [InlineCode("{}")] public Props() {}
 
       public object accept;               //
+      public object acceptCharset;        // null,
       public object accessKey;            //
       public object action;               //
       public object allowFullScreen;      //  MUST_USE_ATTRIBUTE | HAS_BOOLEAN_VALUE,
@@ -29,8 +30,11 @@ namespace ReactJs
       public object cellPadding;          //  null,
       public object cellSpacing;          //  null,
       public object charSet;              //  MUST_USE_ATTRIBUTE,
+
       [ScriptName("checked")]
       public object Checked;              //  MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
+
+      public object classID;              //  MUST_USE_ATTRIBUTE,
       public object className;            //  MUST_USE_PROPERTY,
       public object cols;                 //  MUST_USE_ATTRIBUTE | HAS_POSITIVE_NUMERIC_VALUE,
       public object colSpan;              //  null,
@@ -48,7 +52,11 @@ namespace ReactJs
       public object draggable;            //  null,
       public object encType;              //  null,
       public object form;                 //  MUST_USE_ATTRIBUTE,
+      public object formAction;           //  MUST_USE_ATTRIBUTE,
+      public object formEncType;          //  MUST_USE_ATTRIBUTE,
+      public object formMethod;           //  MUST_USE_ATTRIBUTE,
       public object formNoValidate;       //  HAS_BOOLEAN_VALUE,
+      public object formTarget;           // MUST_USE_ATTRIBUTE,
       public object frameBorder;          //  MUST_USE_ATTRIBUTE,
       public object height;               //  MUST_USE_ATTRIBUTE,
       public object hidden;               //  MUST_USE_ATTRIBUTE | HAS_BOOLEAN_VALUE,
@@ -62,8 +70,12 @@ namespace ReactJs
       public object lang;                 //  null,
       public object list;                 //  null,
       public object loop;                 //  MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
+      public object manifest;             //  MUST_USE_ATTRIBUTE,
+      public object marginHeight;         //  null,
+      public object marginWidth;          //  null,
       public object max;                  //  null,
       public object maxLength;            //  MUST_USE_ATTRIBUTE,
+      public object media;                //  MUST_USE_ATTRIBUTE,
       public object mediaGroup;           //  null,
       public object method;               //  null,
       public object min;                  //  null,
@@ -71,6 +83,7 @@ namespace ReactJs
       public object muted;                //  MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
       public object name;                 //  null,
       public object noValidate;           //  HAS_BOOLEAN_VALUE,
+      public object open;                 //  null,
       public object pattern;              //  null,
       public object placeholder;          //  null,
       public object poster;               //  null,
@@ -88,6 +101,7 @@ namespace ReactJs
       public object scrollTop;            //  MUST_USE_PROPERTY,
       public object seamless;             //  MUST_USE_ATTRIBUTE | HAS_BOOLEAN_VALUE,
       public object selected;             //  MUST_USE_PROPERTY | HAS_BOOLEAN_VALUE,
+      public object sizes;                //  MUST_USE_ATTRIBUTE,
       public object size;                 //  MUST_USE_ATTRIBUTE | HAS_POSITIVE_NUMERIC_VALUE,
       public object span;                 //  HAS_POSITIVE_NUMERIC_VALUE,
       public object spellCheck;           //  null,
@@ -95,7 +109,7 @@ namespace ReactJs
       public object srcDoc;               //  MUST_USE_PROPERTY,
       public object srcSet;               //  null,
       public object step;                 //  null,
-      public JsDictionary style;                //  null,
+      public JsDictionary style;          //  null,
       public object tabIndex;             //  null,
       public object target;               //  null,
       public object title;                //  null,
@@ -109,6 +123,9 @@ namespace ReactJs
       public object autoCapitalize;       //  null, // Supported in Mobile Safari for keyboard hints
       public object autoCorrect;          //  null, // Supported in Mobile Safari for keyboard hints
       public object property;             //  null, // Supports OG in meta tags
+      public object itemProp;             //  for HTML5 microdata.
+      public object itemScope;            //  for HTML5 microdata.
+      public object itemType;             //  for HTML5 microdata.
 
       // SVG Properties
       
@@ -140,7 +157,11 @@ namespace ReactJs
       public object x;                    //  MUST_USE_ATTRIBUTE,
       public object y1;                   //  MUST_USE_ATTRIBUTE,
       public object y2;                   //  MUST_USE_ATTRIBUTE,
-      public object y;                    //  MUST_USE_ATTRIBUTE                 
+      public object y;                    //  MUST_USE_ATTRIBUTE       
+      
+      // TODO coords, crossOrigin, download, hrefLang, mediaGroup, muted, scrolling, shape, srcSet, start, useMap    
+      
+      // TODO svg: dx, dy, fillOpacity, fontFamily, fontSize, markerEnd, markerMid, markerStart, opacity, patternContentUnits, patternUnits, preserveAspectRatio, strokeDasharray, strokeOpacity      
    }
 }
 

@@ -11,7 +11,7 @@ using ReactJs;
 
 // example of a very simple component: it does nothing, it's just a <div> with some text
 
-public class Hello : ReactComponent
+public class Hello : ReactElement
 {
    public object render()
    {

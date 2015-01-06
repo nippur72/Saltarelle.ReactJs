@@ -12,7 +12,7 @@
    <meta name="fragment" content="!"/>   
    <title></title>       
 
-   <script src="libs/react-0.10.0.js" type="text/javascript"></script>   
+   <script src="libs/react-0.12.2.js" type="text/javascript"></script>   
    <script src="libs/mscorlib.js" type="text/javascript"></script>
    <script src="scripts/saltarelle-react.js" type="text/javascript"></script>
    <script src="scripts/test.js" type="text/javascript"></script>

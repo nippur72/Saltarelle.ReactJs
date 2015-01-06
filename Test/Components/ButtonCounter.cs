@@ -9,7 +9,7 @@ using System.Diagnostics;
 
 using ReactJs;
 
-public class ButtonCounter : ReactComponent
+public class ButtonCounter : ReactElement
 {
    // props can be either 'dynamic' or statically typed with their own type
    public class ButtonProp
@@ -31,15 +31,6 @@ public class ButtonCounter : ReactComponent
          click_count = count;
       }
    }      
-
-   // here there is an (optional) static constructor for the component that caches
-   // the javascript factory function and also provides some static typing
-   private static ReactClass _factory = null; 
-   public static ReactComponent New(string name)
-   {
-      if(_factory==null) _factory = React.createClass<ButtonCounter>();  
-      return _factory.New(new ButtonProp{name = name}); 
-   }
 
    // since we opted for typed state, we build it with its constructor
    // the other way was to: return new { count=0 };
@@ -69,22 +60,22 @@ public class ButtonCounter : ReactComponent
       // component from Hello.cs
       // the 'hello' variable will hold the component factory function
       // instances of the hello component needs to be created with 'hello.New()'
-      var hello = ReactHelper.CreateClass<Hello>();  
-      
+              
       // create a list of <li> items 
-      List<ReactComponent> lll = new List<ReactComponent>();
+      List<ReactElement> lll = new List<ReactElement>();
       for(int t=0;t<S.click_count;t++) lll.Add
       ( 
          li(string.Format("item {0} with name {1} clicked {2} times",t,P.name,S.click_count) )
       );         
-
+      
       // and wrap them in a <div> and <ul> 
       return div(new Props{ style = new JsDictionary("font-size", "1em") }, 
+               p("Featuring React v0.12.2"),
                ul(     
                   lll, 
-                  li(Prop.onClick(handleClick), "click here"),
+                  li(new Props{ style = new JsDictionary("font-size", "2em")}.onClick(handleClick), "click here"),
                   li("this is a fixed item"),
-                  li(hello.New())              
+                  li(React.createElement<Hello>())              
                )
             );                          
    }

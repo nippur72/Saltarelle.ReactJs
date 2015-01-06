@@ -11,7 +11,7 @@ namespace ReactJs
 {
    public class ReactHelper
    {     
-      public static ReactClass CreateClass<T>()
+      public static ReactComponent CreateComponent<T>()
       {         
          Type type = typeof(T);
         
@@ -24,20 +24,22 @@ namespace ReactJs
          if(!methods.Contains(getInitialState))
          {
             // if user did not specify a getInitialState, provide an empty one
-            body += string.Format("$ob.{0}=(function() {{ $type.apply(this); return {{ }}; }});",getInitialState);   
+            body += string.Format("$ob.{0}=(function() {{ /*$type.apply(this);*/ return {{ }}; }});",getInitialState);   
          }
          else
          {
-            body += string.Format("$ob.{0}=(function() {{ $type.apply(this); return $type.prototype.{0}(); }});",getInitialState);
+            body += string.Format("$ob.{0}=(function() {{ /*$type.apply(this);*/ return $type.prototype.{0}(); }});",getInitialState);
          }
+
+         // TODO .apply needed? 
 
          methods.Remove(getInitialState);
 
          foreach(var method in methods)
-         {
+         {           
             body += string.Format("$ob.{0}=$type.prototype.{0};",method);
          }
-
+         
          body += "return $ob;";
          
          // TODO statics
@@ -47,11 +49,19 @@ namespace ReactJs
          Function F = new Function("",body);
          var defob = F.Call(null);
 
-         return createClass(defob);
+         ReactComponent component = createClass(defob);
+
+         // writes in _factory
+         setfactory(type,component);
+
+         return component;
       }
 
+      [InlineCode("{T}._factory = {comp};")]
+      private extern static void setfactory(Type T, ReactComponent comp);
+
       [InlineCode("React.createClass({definition})")]
-      public static ReactClass createClass(object definition) { return null; }
+      public static ReactComponent createClass(object definition) { return null; }
    }
 }
 
